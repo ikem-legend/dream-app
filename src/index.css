@@ -10,3 +10,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@layer base {
+  body {
+    @apply bg-gray-100
+  }
+}
+
+@layer utilities {
+  .dream-form {
+    @apply mx-auto w-6/12
+  }
+  .dream-form input, .dream-form textarea {
+    @apply border-2 border-gray-400 p-2 rounded
+  }
+  .dream-form input {
+    @apply w-6/12
+  }
+  .dream-form textarea {
+    @apply w-full h-32
+  }
+  .btn {
+    @apply p-2 w-2/5 mt-2 bg-gray-600 text-white float-right rounded
+  }
+}
