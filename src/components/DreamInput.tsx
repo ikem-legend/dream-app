@@ -1,7 +1,10 @@
-import React from "react"
+import React, {useContext} from "react"
 import {useForm} from "react-hook-form";
+import DreamContext from "../context/DreamContext";
 
 const DreamInput = () => {
+  const context = useContext(DreamContext)
+  console.log(context)
   const {register, handleSubmit, errors} = useForm()
   const saveDream = (): void => {
     console.log('dream')
@@ -18,9 +21,9 @@ const DreamInput = () => {
             <div className="text-red-300">{errors.firstName?.type === "minLength" && "First name must be a minimum of 3 letters"}</div>
           </div>
           <div>
-            <textarea name="dream" ref={register({required: true, minLength: 5})} placeholder="Type your message here" />
-            <div className="text-red-300">{errors.dream?.type === "required" && "Please enter dream description"}</div>
-            <div className="text-red-300">{errors.dream?.type === "minLength" && "Dream description must be a minimum of 5 letters"}</div>
+            <textarea name="dreamDesc" ref={register({required: true, minLength: 5})} placeholder="Type your message here" />
+            <div className="text-red-300">{errors.dreamDesc?.type === "required" && "Please enter dream description"}</div>
+            <div className="text-red-300">{errors.dreamDesc?.type === "minLength" && "Dream description must be a minimum of 5 letters"}</div>
           </div>
           <button className="btn" type="submit">Submit</button>
         </form>

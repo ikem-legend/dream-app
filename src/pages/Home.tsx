@@ -1,8 +1,8 @@
-import React/*, {FC}*/ from 'react'
-import {RouteComponentProps} from '@reach/router'
+import React, {FC} from "react"
+import {RouteComponentProps} from "@reach/router"
 import DreamInput from "../components/DreamInput";
 
-const Home = (props: RouteComponentProps) => {
+const Home: FC<RouteComponentProps> = (props: RouteComponentProps) => {
   return (
     <div>
       <h1 className="text-center text-3xl">Hi, Welcome to my DreamWorld</h1>

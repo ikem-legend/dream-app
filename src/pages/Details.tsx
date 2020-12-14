@@ -1,12 +1,12 @@
-import React/*, {FC}*/ from 'react'
+import React, {FC} from 'react'
 import {RouteComponentProps} from '@reach/router'
 
-interface InvoiceProps extends RouteComponentProps
+interface DreamProps extends RouteComponentProps
 {
   dreamId?: string;
 }
 
-const Details = (props: InvoiceProps) => {
+const Details: FC<DreamProps> = (props: DreamProps) => {
   return (
     <div>Details</div>
   )
