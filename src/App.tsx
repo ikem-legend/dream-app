@@ -8,7 +8,7 @@ import DreamContext from "./context/DreamContext";
 function App() {
   return (
     <div className="App container mx-auto p-10">
-      <DreamContext.Provider value={[]}>
+      <DreamContext.Provider value={[[], () => {}]}>
         <Router>
           <Home path="/" />
           <Details path="/details" />

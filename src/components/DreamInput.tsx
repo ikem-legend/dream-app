@@ -2,12 +2,19 @@ import React, {useContext} from "react"
 import {useForm} from "react-hook-form";
 import DreamContext from "../context/DreamContext";
 
+type DreamFormInputs = {
+  firstName: string,
+  dreamDesc: string
+}
+
 const DreamInput = () => {
-  const context = useContext(DreamContext)
-  console.log(context)
-  const {register, handleSubmit, errors} = useForm()
+  const [dream, setDream] = useContext(DreamContext)
+  const {register, handleSubmit, getValues, reset, errors} = useForm<DreamFormInputs>()
   const saveDream = (): void => {
-    console.log('dream')
+    const {firstName, dreamDesc} = getValues()
+    dream.push({firstName, dreamDesc})
+    setDream(dream)
+    reset()
   }
 
   return (

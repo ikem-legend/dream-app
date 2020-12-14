@@ -5,7 +5,12 @@ type Dream = {
   dreamDesc: string
 }
 
+type DreamContextType = [
+  Dream[],
+  (dream: Dream[]) => void
+]
+
 const dreamDB: Dream[] = []
-const DreamContext = createContext(dreamDB)
+const DreamContext = createContext<DreamContextType>([dreamDB, () => {}])
 
 export default DreamContext
