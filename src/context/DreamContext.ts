@@ -3,6 +3,7 @@ import {createContext, useReducer} from "react";
 export type DreamData = {
   firstName: string
   dreamDesc: string
+  analysis?: string;
 }
 
 type DreamDefn = {

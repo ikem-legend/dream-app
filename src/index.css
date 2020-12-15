@@ -37,6 +37,9 @@ body {
     @apply w-2/5 mt-2 float-right
   }
   .dream-db {
-    @apply border-2 border-gray-400
+    @apply border-2 border-gray-400 p-2
+  }
+  .dream-db td {
+    @apply p-2
   }
 }

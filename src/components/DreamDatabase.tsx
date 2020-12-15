@@ -1,18 +1,27 @@
 import React, {FC, useContext} from "react"
-import {Link} from "@reach/router";
+import {navigate} from "@reach/router";
 import {DreamContext, DreamData} from "../context/DreamContext";
 
 const DreamDatabase: FC = () => {
-  const {dreams} = useContext(DreamContext)
+  const {dreams, dispatch} = useContext(DreamContext)
   const deleteDream = (idx: number): void => {
     dreams.splice(idx, 1)
+    dispatch({dreams: [...dreams]})
+  }
+
+  const viewDream = async (dreamObj: DreamData): Promise<void> => {
+    const {firstName, dreamDesc} = dreamObj
+    const selectedDream = dreams.filter(dreamInfo => dreamInfo.firstName === firstName && dreamInfo.dreamDesc === dreamDesc)[0]
+    const url = dreams.indexOf(selectedDream)
+    await navigate(`/details/${url}`)
+    console.log(url)
   }
 
   return (
     <div className="grid-rows-1 mt-5">
       <div className="grid-cols-1 p-5">
         {dreams.length ? (
-          <table className="dream-db table-fixed">
+          <table className="dream-db table-fixed overflow-y-scroll">
             <thead>
               <tr>
                 <th className="w-4/12" />
@@ -21,13 +30,13 @@ const DreamDatabase: FC = () => {
                 <th className="w-2/12" />
               </tr>
             </thead>
-            <tbody className="px-10">
+            <tbody>
               {dreams.length ? dreams.map((dreamDetails: DreamData, idx: number) => (
                 <tr key={idx}>
-                  <td>{dreamDetails.dreamDesc}</td>
+                  <td className="pl-2">{dreamDetails.dreamDesc}</td>
                   <td>{dreamDetails.firstName}</td>
-                  <td><button onClick={() => deleteDream(idx)} className="btn">Delete</button></td>
-                  <td><button className="btn"><Link to={`/details/${idx}`}>View</Link></button></td>
+                  <td><button onClick={() => deleteDream(idx)} className="btn w-full">Delete</button></td>
+                  <td><button className="btn w-full" onClick={() => viewDream({...dreamDetails})}>View</button></td>
                 </tr>
               )) : null}
             </tbody>
