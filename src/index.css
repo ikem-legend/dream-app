@@ -18,7 +18,7 @@ body {
 }
 
 @layer utilities {
-  .dream-form {
+  .dream-form, .dream-db {
     @apply mx-auto w-6/12
   }
   .dream-form input, .dream-form textarea {
@@ -31,6 +31,12 @@ body {
     @apply w-full h-32
   }
   .btn {
-    @apply p-2 w-2/5 mt-2 bg-gray-600 text-white float-right rounded
+    @apply p-2 bg-gray-600 text-white rounded
+  }
+  .btn.submit-btn {
+    @apply w-2/5 mt-2 float-right
+  }
+  .dream-db {
+    @apply border-2 border-gray-400
   }
 }

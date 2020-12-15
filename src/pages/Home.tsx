@@ -1,6 +1,7 @@
 import React, {FC} from "react"
 import {RouteComponentProps} from "@reach/router"
 import DreamInput from "../components/DreamInput";
+import DreamDatabase from "../components/DreamDatabase";
 
 const Home: FC<RouteComponentProps> = (props: RouteComponentProps) => {
   return (
@@ -9,6 +10,7 @@ const Home: FC<RouteComponentProps> = (props: RouteComponentProps) => {
       <h2 className="font-bold text-center text-2xl m-4">What did you dream last night?</h2>
 
       <DreamInput />
+      <DreamDatabase />
     </div>
   )
 }

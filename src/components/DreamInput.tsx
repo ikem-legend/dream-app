@@ -1,4 +1,4 @@
-import React, {useContext} from "react"
+import React, {useContext, useEffect} from "react"
 import {useForm} from "react-hook-form";
 import DreamContext from "../context/DreamContext";
 
@@ -8,12 +8,13 @@ type DreamFormInputs = {
 }
 
 const DreamInput = () => {
-  const [dream, setDream] = useContext(DreamContext)
+  const [dreams, setDreams] = useContext(DreamContext)
+  console.log(dreams)
   const {register, handleSubmit, getValues, reset, errors} = useForm<DreamFormInputs>()
   const saveDream = (): void => {
     const {firstName, dreamDesc} = getValues()
-    dream.push({firstName, dreamDesc})
-    setDream(dream)
+    dreams.push({firstName, dreamDesc})
+    setDreams(dreams)
     reset()
   }
 
@@ -32,7 +33,7 @@ const DreamInput = () => {
             <div className="text-red-300">{errors.dreamDesc?.type === "required" && "Please enter dream description"}</div>
             <div className="text-red-300">{errors.dreamDesc?.type === "minLength" && "Dream description must be a minimum of 5 letters"}</div>
           </div>
-          <button className="btn" type="submit">Submit</button>
+          <button className="btn submit-btn" type="submit">Submit</button>
         </form>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import {createContext} from "react";
 
-type Dream = {
+export type Dream = {
   firstName: string
   dreamDesc: string
 }
