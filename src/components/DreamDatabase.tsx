@@ -1,16 +1,11 @@
-import React, {FC, useContext, useEffect} from "react"
-import DreamContext, {Dream} from "../context/DreamContext";
+import React, {FC, useContext} from "react"
+import {Link} from "@reach/router";
+import {DreamContext, DreamData} from "../context/DreamContext";
 
 const DreamDatabase: FC = () => {
-  const [dreams, setDreams] = useContext(DreamContext)
-  useEffect(() => {
-    console.log(dreams)
-    setDreams(dreams)
-  }, [dreams, setDreams])
+  const {dreams} = useContext(DreamContext)
   const deleteDream = (idx: number): void => {
     dreams.splice(idx, 1)
-    setDreams(dreams)
-    console.log(dreams)
   }
 
   return (
@@ -20,17 +15,19 @@ const DreamDatabase: FC = () => {
           <table className="dream-db table-fixed">
             <thead>
               <tr>
-                <th className="w-6/12" />
                 <th className="w-4/12" />
+                <th className="w-4/12" />
+                <th className="w-2/12" />
                 <th className="w-2/12" />
               </tr>
             </thead>
             <tbody className="px-10">
-              {dreams.length ? dreams.map((dreamDetails: Dream, idx: number) => (
+              {dreams.length ? dreams.map((dreamDetails: DreamData, idx: number) => (
                 <tr key={idx}>
                   <td>{dreamDetails.dreamDesc}</td>
                   <td>{dreamDetails.firstName}</td>
-                  <td><button onClick={() => deleteDream(idx)} className="btn">Delete Dream</button></td>
+                  <td><button onClick={() => deleteDream(idx)} className="btn">Delete</button></td>
+                  <td><button className="btn"><Link to={`/details/${idx}`}>View</Link></button></td>
                 </tr>
               )) : null}
             </tbody>

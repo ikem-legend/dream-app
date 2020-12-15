@@ -1,16 +1,36 @@
-import {createContext} from "react";
+import {createContext, useReducer} from "react";
 
-export type Dream = {
+export type DreamData = {
   firstName: string
   dreamDesc: string
 }
 
-type DreamContextType = [
-  Dream[],
-  (dream: Dream[]) => void
-]
+type DreamDefn = {
+  dreams: DreamData[]
+}
 
-const dreamDB: Dream[] = []
-const DreamContext = createContext<DreamContextType>([dreamDB, () => {}])
+type DreamContextType = {
+  dreams: DreamData[],
+  dispatch: ({dreams}: DreamDefn) => void
+}
 
-export default DreamContext
+const useController = () => {
+  const initialState = {
+    dreams: []
+  };
+
+  const [state, dispatch] = useReducer(
+    (state: any, value: any) => ({
+      ...state,
+      ...value,
+    }),
+    initialState,
+  );
+
+  return {state, dispatch};
+};
+
+const dreamDB: DreamData[] = []
+export const DreamContext = createContext<DreamContextType>({dreams: dreamDB, dispatch: () => {}})
+
+export default useController

@@ -1,18 +1,18 @@
-import React, {useState} from "react";
+import React from "react";
 import {Router} from "@reach/router";
 import Home from "./pages/Home";
 import Details from "./pages/Details";
 import NotFound from "./components/NotFound"
-import DreamContext, {Dream} from "./context/DreamContext";
+import useController, {DreamContext} from "./context/DreamContext";
 
 function App() {
-  const [dreamList, setDreamList] = useState<Dream[] | []>([])
+  const {state, dispatch} = useController();
   return (
     <div className="App container mx-auto p-10">
-      <DreamContext.Provider value={[dreamList, setDreamList]}>
+      <DreamContext.Provider value={{...state, dispatch}}>
         <Router>
           <Home path="/" />
-          <Details path="/details" />
+          <Details path="/details/:id" />
           <NotFound default />
         </Router>
       </DreamContext.Provider>
