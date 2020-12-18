@@ -29,23 +29,24 @@ const DreamInput = () => {
           <div className="mb-5">
             <input
               name="firstName"
+              id="firstName"
               type="text"
               ref={register({
                 required: true,
-                pattern: /[A-Za-z]{3,}/,
+                pattern: /^[A-Za-z]{3,}$/,
                 minLength: 3,
               })}
               placeholder="First Name"
             />
-            <div className="text-red-300">
+            <div className="errors text-red-300">
               {errors.firstName?.type === 'required' &&
                 'Your first name is required'}
             </div>
-            <div className="text-red-300">
+            <div className="errors text-red-300">
               {errors.firstName?.type === 'pattern' &&
                 'Please enter valid first name'}
             </div>
-            <div className="text-red-300">
+            <div className="errors text-red-300">
               {errors.firstName?.type === 'minLength' &&
                 'First name must be a minimum of 3 letters'}
             </div>
@@ -53,14 +54,15 @@ const DreamInput = () => {
           <div>
             <textarea
               name="dreamDesc"
+              id="dreamDesc"
               ref={register({required: true, minLength: 5})}
               placeholder="Type your message here"
             />
-            <div className="text-red-300">
+            <div className="errors text-red-300">
               {errors.dreamDesc?.type === 'required' &&
                 'Please enter dream description'}
             </div>
-            <div className="text-red-300">
+            <div className="errors text-red-300">
               {errors.dreamDesc?.type === 'minLength' &&
                 'Dream description must be a minimum of 5 letters'}
             </div>
