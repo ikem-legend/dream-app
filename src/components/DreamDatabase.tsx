@@ -1,6 +1,6 @@
-import React, {FC, useContext} from "react"
-import {Link} from "@reach/router"
-import {DreamContext, DreamData} from "../context/DreamContext"
+import React, {FC, useContext} from 'react'
+import {Link} from '@reach/router'
+import {DreamContext, DreamData} from '../context/DreamContext'
 
 const DreamDatabase: FC = () => {
   const {dreams, dispatch} = useContext(DreamContext)
@@ -11,7 +11,10 @@ const DreamDatabase: FC = () => {
 
   const viewDream = (dreamObj: DreamData): string => {
     const {firstName, dreamDesc} = dreamObj
-    const selectedDream = dreams.filter(dreamInfo => dreamInfo.firstName === firstName && dreamInfo.dreamDesc === dreamDesc)[0]
+    const selectedDream = dreams.filter(
+      (dreamInfo) =>
+        dreamInfo.firstName === firstName && dreamInfo.dreamDesc === dreamDesc,
+    )[0]
     const dreamIndex = dreams.indexOf(selectedDream)
     return `/details/${dreamIndex}`
   }
@@ -30,14 +33,27 @@ const DreamDatabase: FC = () => {
               </tr>
             </thead>
             <tbody>
-              {dreams.length ? dreams.map((dreamDetails: DreamData, idx: number) => (
-                <tr key={idx}>
-                  <td className="pl-2">{dreamDetails.dreamDesc}</td>
-                  <td>{dreamDetails.firstName}</td>
-                  <td><button onClick={() => deleteDream(idx)} className="btn w-full">Delete</button></td>
-                  <td><Link to={viewDream({...dreamDetails})}><button className="btn w-full">View</button></Link></td>
-                </tr>
-              )) : null}
+              {dreams.length
+                ? dreams.map((dreamDetails: DreamData, idx: number) => (
+                    <tr key={idx}>
+                      <td className="pl-2">{dreamDetails.dreamDesc}</td>
+                      <td>{dreamDetails.firstName}</td>
+                      <td>
+                        <button
+                          onClick={() => deleteDream(idx)}
+                          className="btn w-full"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                      <td>
+                        <Link to={viewDream({...dreamDetails})}>
+                          <button className="btn w-full">View</button>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                : null}
             </tbody>
           </table>
         ) : null}
