@@ -1,6 +1,6 @@
 import React, {FC, useContext} from "react"
-import {navigate} from "@reach/router";
-import {DreamContext, DreamData} from "../context/DreamContext";
+import {Link} from "@reach/router"
+import {DreamContext, DreamData} from "../context/DreamContext"
 
 const DreamDatabase: FC = () => {
   const {dreams, dispatch} = useContext(DreamContext)
@@ -9,12 +9,11 @@ const DreamDatabase: FC = () => {
     dispatch({dreams: [...dreams]})
   }
 
-  const viewDream = async (dreamObj: DreamData): Promise<void> => {
+  const viewDream = (dreamObj: DreamData): string => {
     const {firstName, dreamDesc} = dreamObj
     const selectedDream = dreams.filter(dreamInfo => dreamInfo.firstName === firstName && dreamInfo.dreamDesc === dreamDesc)[0]
-    const url = dreams.indexOf(selectedDream)
-    await navigate(`/details/${url}`)
-    console.log(url)
+    const dreamIndex = dreams.indexOf(selectedDream)
+    return `/details/${dreamIndex}`
   }
 
   return (
@@ -36,7 +35,7 @@ const DreamDatabase: FC = () => {
                   <td className="pl-2">{dreamDetails.dreamDesc}</td>
                   <td>{dreamDetails.firstName}</td>
                   <td><button onClick={() => deleteDream(idx)} className="btn w-full">Delete</button></td>
-                  <td><button className="btn w-full" onClick={() => viewDream({...dreamDetails})}>View</button></td>
+                  <td><Link to={viewDream({...dreamDetails})}><button className="btn w-full">View</button></Link></td>
                 </tr>
               )) : null}
             </tbody>

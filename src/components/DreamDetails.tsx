@@ -1,4 +1,4 @@
-import React, {FC, useState, useContext} from "react"
+import React, {FC, useState, useContext, useEffect} from "react"
 import {useParams} from "@reach/router";
 import {DreamContext} from "../context/DreamContext";
 
@@ -7,7 +7,9 @@ const DreamDetails: FC = () => {
   const {dreams} = useContext(DreamContext)
   const {id} = useParams()
   const dreamData = dreams[id]
-  if (dreamData) setDreamExists(true)
+  useEffect(() => {
+    if (dreamData) setDreamExists(true)
+  }, [dreamData])
   // Create random dream analysis
   const dreamAnalysis = [
     'Good', 'Wonderful', 'Bad', 'Terrible'
@@ -18,13 +20,34 @@ const DreamDetails: FC = () => {
   return (
     <div className="m-auto w-3/5">
       {dreamExists ? (
-        <div className="border-2 border-gray-400 rounded mb-4">
-          Dream Details
-          <h3 className="text-2xl my-2">First Name: <span className="font-bold">{dreamData.firstName}</span></h3>
-          <h3 className="text-xl my-2">Description</h3>
-          <p>{dreamData.dreamDesc}</p>
-          <h3 className="text-xl my-2">Recommendation</h3>
-          <p>{dreamData.analysis}</p>
+        <div className="border-2 border-gray-400 rounded">
+          <div className="grid-rows-1">
+            <div className="grid-cols-1 p-5">
+              <h2 className="text-3xl font-bold text-center">Dream Details</h2>
+              <table className="table-fixed w-full">
+                <thead>
+                  <tr>
+                    <th className="w-4/12" />
+                    <th className="w-8/12" />
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="font-bold"><h3 className="text-xl my-2">First Name: </h3></td>
+                    <td><span>{dreamData.firstName}</span></td>
+                  </tr>
+                  <tr>
+                    <td className="font-bold"><h3 className="text-xl my-2">Description</h3></td>
+                    <td><p>{dreamData.dreamDesc}</p></td>
+                  </tr>
+                  <tr>
+                    <td className="font-bold"><h3 className="text-xl my-2">Recommendation</h3></td>
+                    <td><p>{dreamData.analysis}</p></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       ) : (
         <div className="border-2 border-gray-400 rounded mb-4">
